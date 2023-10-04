@@ -10,36 +10,18 @@ class Shoe(dict):
         self.product = product
         self.cost = cost
         self.quantity = quantity
-        
-        '''
-        In this function, you must initialise the following attributes:
-            ● country,
-            ● code,
-            ● product,
-            ● cost, and
-            ● quantity.
-        '''
     
     def get_cost(self):
         return self.cost
-                      
-        '''
-        Add the code to return the cost of the shoe in this method.
-        '''
 
     def get_quantity(self):
-        return int(self.quantity)
-        '''
-        Add the code to return the quantity of the shoes.
-        ''' 
+        return int(self.quantity) 
     
     def __str__(self):
         #here I return a string of the attributes for ease of reading.
         #return f'Country: {self.country}, Code: {self.code}, Product: {self.product}, Cost: {self.cost}, Quantity: {self.quantity}  '
         return f'{self.country}, {self.code}, {self.product}, {self.cost}, {self.quantity}'            
-        '''
-        Add a code to returns a string representation of a class.
-        '''
+
         
 #=============Shoe list===========
 '''
@@ -86,13 +68,6 @@ def tabular_data():
             temp_data.append(x)
         data_list.append(temp_data)
     return data_list    
-    '''
-    This function will open the file inventory.txt
-    and read the data from this file, then create a shoes object with this data
-    and append this object into the shoes list. One line in this file represents
-    data to create one object of shoes. You must use the try-except in this function
-    for error handling. Remember to skip the first line using your code.
-    '''
 
 def capture_shoes():
     while True:
@@ -156,24 +131,12 @@ Quantity: {quantity}''')
     
         overwrite()
          
-    
-    
-    '''
-    This function will allow a user to capture data
-    about a shoe and use this data to create a shoe object
-    and append this object inside the shoe list.
-    '''
+
 
 def view_all():
     table = tabulate(data_list, headers = ['Country', 'Code', 'Product', 'Cost', 'Quantity'], tablefmt= 'simple_grid' )
     print(table)
         
-    '''
-    This function will iterate over the shoes list and
-    print the details of the shoes returned from the __str__
-    function. Optional: you can organise your data in a table format
-    by using Python’s tabulate module.
-    '''
 
 def re_stock():
       
@@ -189,13 +152,6 @@ def re_stock():
     str(min_object.quantity) 
     '''
     
-    #below I feel that this approach to give the user different options to search by works better
-    #coming from an environment where one is looking for inventory this seems most logical
-    #I have however left my original code above for you to mark where I find the minimum
-    #I ask the user for a choice on the what low quantity they are looking for
-    #I count and iterate through the shoe_list using the enumerate function as well to keep track of the entries
-    #A check is done to display the quantaties less than the users input
-    #I then display a list and ask the user which shoe they would like to reorder
     choice = int(input('What minimum quantity are you looking for? '))
     for count, line in enumerate(shoe_list, 1):
         if int(line.quantity) <= choice:
@@ -212,12 +168,6 @@ def re_stock():
             
             overwrite()
     
-    '''
-    This function will find the shoe object with the lowest quantity,
-    which is the shoes that need to be re-stocked. Ask the user if they
-    want to add this quantity of shoes and then update it.
-    This quantity should be updated on the file for this shoe.
-    '''
 
 def seach_shoe():     
     #here I give my user choices on how they would like to search. They have options to search by all the columns and not only by code 
@@ -259,11 +209,6 @@ Enter 'Quantity' if you want to search by Quantity:
     elif search_choice == '-1':
         return menu
             
-            
-    '''
-     This function will search for a shoe from the list
-     using the shoe code and return this object so that it will be printed.
-    '''
 
 def value_per_item():
     #Here I use the tabulated data as I want to display it as a table
@@ -275,11 +220,7 @@ def value_per_item():
         total_value_table.append(line)
                
     print(tabulate(total_value_table, headers = ['Country', 'Code', 'Product', 'Cost', 'Quantity', 'Total Value'], tablefmt= 'simple_grid' ))
-    '''
-    This function will calculate the total value for each item.
-    Please keep the formula for value in mind: value = cost * quantity.
-    Print this information on the console for all the shoes.
-    '''
+
 
 def highest_qty():
     #Here I check for the max quantity like I did for the re_stock function
@@ -287,11 +228,7 @@ def highest_qty():
     max_object = max(shoe_list, key = Shoe.get_quantity)
     x = max_object.code, max_object.product, 'is on SALE!!!'
     print_boxed_output(x)
-    
-    '''
-    Write code to determine the product with the highest quantity and
-    print this shoe as being for sale.
-    '''
+
 
 def print_boxed_output(output):
     #Here I create a function that prints an output into a box to make certain outputs more presentable
@@ -312,10 +249,7 @@ def overwrite():
         for obj in shoe_list:
             f.writelines(str(obj) + '\n')
 #==========Main Menu=============
-'''
-Create a menu that executes each function above.
-This menu should be inside the while loop. Be creative!
-'''
+
 read_shoes_data() #at start up of program so that it populates the shoe_list
 tabular_data() #at start up to populate the table data list
 while True:
